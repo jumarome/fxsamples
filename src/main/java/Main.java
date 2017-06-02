@@ -1,3 +1,4 @@
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +31,10 @@ public class Main extends Application {
         fruits.add("WaterMelon");
         choiceBox.setItems(fruits);
         choiceBox.setValue("Apple");
-        button.setOnAction(e->getchoiceBox(choiceBox));
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue)->{
+            System.out.println("Old value: "+oldValue);
+            System.out.println("New value: "+newValue);
+        });
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20,20,20,20));
         layout.getChildren().addAll(button,choiceBox);
@@ -39,7 +43,5 @@ public class Main extends Application {
         window.show();
     }
 
-    private void getchoiceBox(ChoiceBox<String> choiceBox) {
-        System.out.println(choiceBox.getValue()+" Selected");
-    }
+
 }
